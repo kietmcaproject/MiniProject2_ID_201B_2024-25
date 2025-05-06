@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Data Cleaner & Analyzer</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <div class="sidebar">
+        <h2>📊 AI Data Analyzer</h2>
+        <button id="toggleTheme" onclick="toggleTheme()">🌙 Toggle Theme</button>
+        <button onclick="document.getElementById('csvFileInput').click()">📂 Upload CSV</button>
+        <button onclick="loadCSV()">📤 Upload & Analyze</button>
+        <button onclick="cleanData()">🧼 Clean Data</button>
+        <button onclick="fillMissingValues()">🔄 Fill Missing Values</button>
+        <button onclick="generateStats()">📊 Generate Statistics</button>
+        <button onclick="detectOutliers()">🚨 Detect Outliers</button>
+        <button onclick="normalizeData()">⚖ Normalize Data</button>
+        <button onclick="plotLineChart()">📈 Line Chart</button>
+        <button onclick="plotBarChart()">📊 Bar Chart</button>
+        <button onclick="plotPieChart()">🍩 Pie Chart</button>
+    </div>
+
+    <div class="main-content">
+        <header class="main-header">
+            <h1>AI-Powered Data Cleaner & Analyzer 🚀</h1>
+        </header>
+
+        <input type="file" id="csvFileInput" accept=".csv" style="display: none;">
+
+        <section class="data-preview">
+            <h2>📋 Data Preview</h2>
+            <div class="table-container">
+                <table id="dataTable">
+                    <thead><tr id="tableHeader"></tr></thead>
+                    <tbody id="tableBody"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="visualization-section">
+            <h2>📊 Data Visualization</h2>
+            <div class="chart-container">
+                <canvas id="dataChart"></canvas>
+            </div>
+        </section>
+    </div>
+
+    <footer class="main-footer">
+        <p>&copy; 2025 AI Data Cleaner & Analyzer. Developed by Chetanya Bedi Deepak Sharma Dhruv Bathla and Devansh Kumar.</p> 
+        <p>All Rights Reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
