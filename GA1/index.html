@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Snipe & Strike</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: #0a0a12;
+            color: #e0e0e0;
+            font-family: 'Press Start 2P', cursive;
+            overflow: hidden;
+            height: 100vh;
+        }
+        
+        #game-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+        }
+        
+        #game-canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+            background-color: #12121a;
+        }
+        
+        /* Game UI Overlay - Hidden by default */
+        #ui-overlay {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    display: flex; /* Add this to make it flex by default */
+    gap: 15px;
+    z-index: 2;
+}
+
+.hidden {
+    display: none !important; /* Make sure this is strong enough to override */
+}
+        
+        .ui-box {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 12px 20px;
+            border: 2px solid #3a3a5a;
+            border-radius: 4px;
+            text-align: center;
+        }
+        
+        .ui-box span {
+            font-size: 14px;
+            color: #ffffff;
+            text-shadow: 0 0 5px #00aaff;
+        }
+        
+        /* Menu Styles */
+        .menu {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(10, 10, 30, 0.9);
+            z-index: 10;
+            padding: 20px;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .title {
+            font-size: 3rem;
+            color: #ff5555;
+            text-shadow: 0 0 10px #ff0000;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .difficulty-container {
+            margin: 2rem 0;
+            text-align: center;
+        }
+        
+        .difficulty-container h2 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: #55aaff;
+        }
+        
+        #difficulty {
+            background-color: #2a2a3a;
+            color: white;
+            border: 2px solid #444466;
+            padding: 10px 15px;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            width: 200px;
+            text-align: center;
+        }
+        
+        .btn {
+            background-color: #3a3a5a;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1rem;
+            cursor: pointer;
+            margin: 10px 0;
+            transition: all 0.3s;
+            border: 2px solid #555577;
+        }
+        
+        .btn:hover {
+            background-color: #555577;
+            transform: scale(1.05);
+        }
+        
+        .btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+        
+        .score-board {
+            margin-top: 2rem;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 1.5rem;
+            border: 2px solid #3a3a5a;
+            width: 300px;
+            max-width: 90%;
+        }
+        
+        .score-board h2 {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            color: #55ff55;
+        }
+        
+        .score-board ul {
+            list-style-type: none;
+        }
+        
+        .score-board li {
+            margin: 0.5rem 0;
+            font-size: 0.8rem;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .input-box {
+            background-color: #2a2a3a;
+            color: white;
+            border: 2px solid #555577;
+            padding: 12px 15px;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.8rem;
+            margin: 1rem 0;
+            text-align: center;
+            width: 250px;
+            max-width: 80%;
+        }
+        
+        #game-over h1 {
+            color: #ff5555;
+            margin-bottom: 1.5rem;
+        }
+        
+        #game-over p {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        #final-score {
+            color: #ffff55;
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <canvas id="game-canvas"></canvas>
+        <div id="ui-overlay" class="hidden">
+            <div class="ui-box">
+                <span>SCORE:</span>
+                <span id="score-value">0</span>
+            </div>
+            <div class="ui-box">
+                <span>HEALTH:</span>
+                <span id="health-value">100</span>
+            </div>
+            <div class="ui-box">
+                <span>AMMO:</span>
+                <span id="ammo-value">30</span>
+            </div>
+        </div>
+        <div id="game-menu" class="menu">
+            <h1 class="title">SNIPE & STRIKE</h1>
+            
+            <div class="difficulty-container">
+                <h2>SELECT DIFFICULTY</h2>
+                <select id="difficulty">
+                    <option value="easy">EASY</option>
+                    <option value="medium">MEDIUM</option>
+                    <option value="hard">HARD</option>
+                </select>
+            </div>
+            
+            <button id="start-game" class="btn">START MISSION</button>
+            
+            <div id="high-scores" class="score-board">
+                <h2>HIGH SCORES</h2>
+                <ul id="scores-list">
+                    <li><span>1. AAA</span> <span>5000</span></li>
+                    <li><span>2. BBB</span> <span>4000</span></li>
+                    <li><span>3. CCC</span> <span>3000</span></li>
+                </ul>
+            </div>
+        </div>
+        <div id="game-over" class="menu hidden">
+            <h1>GAME OVER</h1>
+            <p>YOUR SCORE: <span id="final-score">0</span></p>
+            <input type="text" id="player-name" placeholder="ENTER YOUR NAME " maxlength="10" class="input-box">
+            <button id="submit-score" class="btn">SUBMIT SCORE</button>
+            <button id="restart-game" class="btn">RETRY MISSION</button>
+        </div>
+    </div>
+
+    <script type="module">
+        let gameActive = false;
+        const gameMenu = document.getElementById('game-menu');
+        const gameOverScreen = document.getElementById('game-over');
+        const uiOverlay = document.getElementById('ui-overlay');
+        const startButton = document.getElementById('start-game');
+        const restartButton = document.getElementById('restart-game');
+        
+        startButton.addEventListener('click', () => {
+          gameMenu.classList.add('hidden');
+          uiOverlay.classList.remove('hidden');
+          gameActive = true;
+          console.log('UI Overlay classes:', uiOverlay.className); // Check classes
+          console.log('Computed display:', window.getComputedStyle(uiOverlay).display); // Check actual display
+        });
+
+        restartButton.addEventListener('click', () => {
+          gameOverScreen.classList.add('hidden');
+          uiOverlay.classList.remove('hidden');
+          gameActive = true;
+          console.log('UI Overlay classes after restart:', uiOverlay.className);
+        });
+    </script>
+    <script type="module" src="/main.js"></script>
+</body>
+</html>
