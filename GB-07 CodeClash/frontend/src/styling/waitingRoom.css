@@ -1,0 +1,119 @@
+.waiting-room {
+    text-align: center;
+    padding: 20px;
+    background: linear-gradient(to right, #6a11cb, #2575fc);
+    color: white;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .title {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+  
+  .room-code {
+    font-size: 1.2rem;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 10px 20px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+  }
+  
+  .countdown {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .timer {
+    color: yellow;
+  }
+  
+  .loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .spinner {
+    width: 40px;
+    height: 40px;
+    border: 5px solid rgba(255, 255, 255, 0.3);
+    border-top: 5px solid white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  .loading-text {
+    margin-top: 10px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    animation: blink 1s infinite alternate;
+  }
+  
+  @keyframes blink {
+    0% { opacity: 0.5; }
+    100% { opacity: 1; }
+  }
+  
+  .players-title {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+  
+  .players-list {
+    list-style: none;
+    padding: 0;
+    max-width: 300px;
+    text-align: left;
+  }
+  
+  .player-item {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeIn 0.5s forwards ease-out;
+  }
+  
+  @keyframes fadeIn {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+  }
+
+
+  .cancel-button {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 8px;
+  margin-top: 20px;
+  transition: 0.3s ease-in-out;
+}
+
+.cancel-button:hover {
+  background-color: #d43f3f;
+}
+
+  

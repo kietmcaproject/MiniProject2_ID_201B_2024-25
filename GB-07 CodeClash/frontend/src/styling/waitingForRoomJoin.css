@@ -1,0 +1,98 @@
+.waiting-room {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .host-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .room-code {
+    font-size: 18px;
+    color: #555;
+  }
+  
+  .welcome-status {
+    font-size: 20px;
+    color: rgb(35, 242, 35);
+    margin: 10px 0;
+  }
+  
+  .countdown {
+    font-size: 20px;
+    font-weight: bold;
+    color: red;
+  }
+  
+  .timer {
+    font-size: 22px;
+    font-weight: bold;
+    color: #e44d26;
+  }
+  
+  .loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .spinner {
+    border: 5px solid rgba(0, 0, 0, 0.1);
+    border-left-color: #3498db;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  .players-title {
+    margin-top: 20px;
+    font-size: 20px;
+  }
+  
+  .players-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .player-item {
+    font-size: 18px;
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .fade-in {
+    animation: fadeIn 0.5s ease-in;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  .cancel-button {
+    background-color: red;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 15px;
+  }
+  
+  .cancel-button:hover {
+    background-color: darkred;
+  }
+  
