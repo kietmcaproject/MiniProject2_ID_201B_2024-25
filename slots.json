@@ -1,0 +1,5 @@
+[
+  { "id": 1, "slotNumber": "A1", "isOccupied": false },
+  { "id": 2, "slotNumber": "A2", "isOccupied": false },
+  { "id": 3, "slotNumber": "B1", "isOccupied": false }
+]

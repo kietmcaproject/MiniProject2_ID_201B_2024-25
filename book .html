@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Smart Parking - Book / Release</title>
+</head>
+<body>
+  <h2>Smart Parking Slot Booking</h2>
+
+  <label for="carNumber">Car Number:</label>
+  <input type="text" id="carNumber" placeholder="Enter your car number" />
+
+  <br /><br />
+  <button id="bookBtn">Book Slot</button>
+  <button id="releaseBtn">Release Slot</button>
+
+  <p id="message"></p>
+
+  <script>
+    const messageP = document.getElementById('message');
+
+    async function bookSlot() {
+      const carNumber = document.getElementById('carNumber').value.trim();
+      if (!carNumber) {
+        messageP.textContent = 'Please enter your car number.';
+        messageP.style.color = 'red';
+        return;
+      }
+
+      try {
+        const res = await fetch('/api/book', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ carNumber })
+        });
+        const data = await res.json();
+        if (res.ok) {
+          messageP.textContent = data.message;
+          messageP.style.color = 'green';
+        } else {
+          messageP.textContent = data.error || 'Booking failed';
+          messageP.style.color = 'red';
+        }
+      } catch {
+        messageP.textContent = 'Booking failed due to network error';
+        messageP.style.color = 'red';
+      }
+    }
+
+    async function releaseSlot() {
+      const carNumber = document.getElementById('carNumber').value.trim();
+      if (!carNumber) {
+        messageP.textContent = 'Please enter your car number.';
+        messageP.style.color = 'red';
+        return;
+      }
+
+      try {
+        const res = await fetch('/api/release', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ carNumber })
+        });
+        const data = await res.json();
+        if (res.ok) {
+          messageP.textContent = data.message;
+          messageP.style.color = 'green';
+        } else {
+          messageP.textContent = data.error || 'Release failed';
+          messageP.style.color = 'red';
+        }
+      } catch {
+        messageP.textContent = 'Release failed due to network error';
+        messageP.style.color = 'red';
+      }
+    }
+
+    document.getElementById('bookBtn').addEventListener('click', bookSlot);
+    document.getElementById('releaseBtn').addEventListener('click', releaseSlot);
+  </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Smart Parking System</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Smart Parking System</h1>
+    <nav>
+      <a href ="login.html">Login</a>
+      <a href="#">Home</a>
+      <a href="booking.html">Book Slot</a>
+      <a href="book .html">Availability</a>
+      <a href="register.html">Register</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h2>Welcome to Smart Parking</h2>
+      <p>Book your parking slot easily and hassle-free</p>
+      <button onclick="checkAvailability()">Check Slot Availability</button>
+    </section>
+
+    <section id="slots" class="slots-section hidden">
+      <h3>Available Parking Slots</h3>
+      <div id="slots-container"></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Smart Parking System. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
